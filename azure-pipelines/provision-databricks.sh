@@ -9,7 +9,8 @@ if ! databricks secrets list-scopes --output JSON | jq -e '.scopes[] | select (.
     databricks secrets create-scope --scope bikeshare --initial-manage-principal "users"
 fi
 databricks secrets write --scope bikeshare --key storagekey --string-value $storageAccountKey
-
+echo "updated databricks secrets"
 databricks fs cp --overwrite java-library/target/*.jar dbfs:/model-factory.jar
+echo "databricks copy completed"
 
 
